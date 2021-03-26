@@ -363,6 +363,15 @@ npm install --save-dev webpack-dev-server
 To run the build script you must type `npm run build` and not just `npm build` like you can with `npm start`. This is because `npm start` is an in-built alias for `npm run start`.
 
 ### Html-loader, File-loader, & Clean-webpack
+NOTE: File-Loader doesn't seem to be needed as of webpack5. html-loader will convert image file types for you. Just need to setup an output in webpack.production.js
+example:
+```js
+output: {
+    filename: 'main.[contenthash].js',
+    path: path.resolve(__dirname, 'dist'),
+    assetModuleFilename: 'images/[name].[hash].[ext]',
+  },
+```
 
 [Video Tutorial.](https://www.youtube.com/watch?v=mnS_1lolc44&list=PLblA84xge2_zwxh3XJqy6UVxS60YdusY8&index=8)
 
@@ -414,7 +423,7 @@ npm install --save clean-webpack-plugin
 
 const path = require('path');
 const { merge } = require('webpack-merge');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const common = require('./webpack.common');
 
 module.exports = merge(common, {
